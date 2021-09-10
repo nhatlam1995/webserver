@@ -10,7 +10,7 @@ const verifyToken = (req, res, next) => {
 			.json({ success: false, message: 'Access token not found' })
 
 	try {
-		const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+		const decoded = jwt.verify(token, 'lkj1vxcdsf9-wefgwe8eto')
 
 		req.userId = decoded.userId
 		next()
