@@ -7,7 +7,7 @@ const postRouter = require('./routes/post')
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(`${process.env.DB_LINK}`)
+        await mongoose.connect(`mongodb+srv://quanlilophoc:quanlilophoc@studentmanagement.rm1ko.mongodb.net/studentManagement?retryWrites=true&w=majority`)
 
         console.log('MongoDB connected')
     } catch (error) {
