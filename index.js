@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config()
 const express = require('express')
 const mongoose = require('mongoose')
 
@@ -7,7 +7,7 @@ const postRouter = require('./routes/post')
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(`${process.env.DB_LINK}`)
+        await mongoose.connect(process.env.DB_LINK)
 
         console.log('MongoDB connected')
     } catch (error) {
