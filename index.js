@@ -7,7 +7,7 @@ const postRouter = require('./routes/post')
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.DB_LINK)
+        await mongoose.connect('mongodb+srv://quanlilophoc:quanlilophoc@studentmanagement.rm1ko.mongodb.net/studentManagement?retryWrites=true&w=majority')
 
         console.log('MongoDB connected')
     } catch (error) {
@@ -25,6 +25,6 @@ app.use(express.json())
 app.use('/api/auth', authRouter)
 app.use('/api/posts', postRouter)
 
-const PORT = process.env.PORT || 8000
+const PORT = 8000
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))

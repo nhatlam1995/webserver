@@ -50,7 +50,7 @@ router.post('/register', async (req, res) => {
 		// Return token
 		const accessToken = jwt.sign(
 			{ userId: newUser._id },
-			process.env.ACCESS_TOKEN_SECRET
+			lkj1vxcdsf9-wefgwe8eto
 		)
 
 		res.json({
@@ -94,8 +94,7 @@ router.post('/login', async (req, res) => {
 		// All good
 		// Return token
 		const accessToken = jwt.sign(
-			{ userId: user._id },
-			process.env.ACCESS_TOKEN_SECRET
+			{ userId: user._id }, lkj1vxcdsf9-wefgwe8eto
 		)
 
 		res.json({
