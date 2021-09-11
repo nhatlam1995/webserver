@@ -56,8 +56,9 @@ router.post('/register', async (req, res) => {
 		res.json({
 			success: true,
 			message: 'User created successfully',
-			accessToken
+			data: { token: accessToken }
 		})
+
 	} catch (error) {
 		console.log(error)
 		res.status(500).json({ success: false, message: 'Internal server error' })
@@ -101,7 +102,7 @@ router.post('/login', async (req, res) => {
 		res.json({
 			success: true,
 			message: 'User logged in successfully',
-			accessToken
+			data: { token: accessToken }
 		})
 	} catch (error) {
 		console.log(error)
