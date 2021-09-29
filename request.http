@@ -1,4 +1,6 @@
-POST http://localhost:5000/api/auth/register
+###
+//Register new account
+POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
@@ -7,7 +9,7 @@ Content-Type: application/json
 }
 
 ###
-
+//Login account to get token
 POST http://localhost:8080/api/auth/login
 Content-Type: application/json
 
@@ -17,37 +19,48 @@ Content-Type: application/json
 }
 
 ###
+//Get all Foods or using ?category={categoryId}
+GET http://localhost:8080/api/foods/getFoodsList
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM4NTEzYmViNzZkZmFiOWQ1NjlkMDYiLCJpYXQiOjE2MzExMjU1NjN9.0VzUrE5hfYeFTi8lBRmavbRVjtUYKOvRjUyyWd80N5w
 
-POST http://localhost:5000/api/posts
+###
+//Delete Foods in category
+DELETE http://localhost:8080/api/foods/6153aea7e3b5c33154690a62
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM4NTEzYmViNzZkZmFiOWQ1NjlkMDYiLCJpYXQiOjE2MzExMjU1NjN9.0VzUrE5hfYeFTi8lBRmavbRVjtUYKOvRjUyyWd80N5w
+
+###
+//Add food into category
+POST http://localhost:8080/api/foods/6153ae87e3b5c33154690a5e
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM4NTEzYmViNzZkZmFiOWQ1NjlkMDYiLCJpYXQiOjE2MzExMjU1NjN9.0VzUrE5hfYeFTi8lBRmavbRVjtUYKOvRjUyyWd80N5w
 
 {
-  "title": "React",
-  "description": "React",
-  "url": "react.com",
-  "status": "TO LEARN"
+    "url": "https://firebasestorage.googleapis.com/v0/b/android-e3098.appspot.com/o/Bitter-Gourd-Salted-Egg-300x300.jpeg?alt=media&token=ddb35300-94ac-446a-8baa-7293e4831c3e",
+    "weight": "500gr",
+    "price": 90000,
+    "name": "AAAA",
+    "nation": "America",
+    "status": "NEW",
+    "description": "Stir Fried Rice Vermicelli with Salted Egg (Vegetarian)"
 }
 
 ###
-
-GET http://localhost:5000/api/posts
+//Get categorylist
+GET http://localhost:8080/api/categories
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM4NTEzYmViNzZkZmFiOWQ1NjlkMDYiLCJpYXQiOjE2MzExMjU1NjN9.0VzUrE5hfYeFTi8lBRmavbRVjtUYKOvRjUyyWd80N5w
 
 ###
-
-PUT http://localhost:5000/api/posts/61390048a97a331008066224
+//Add new category
+POST http://localhost:8080/api/categories
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM4NTEzYmViNzZkZmFiOWQ1NjlkMDYiLCJpYXQiOjE2MzExMjU1NjN9.0VzUrE5hfYeFTi8lBRmavbRVjtUYKOvRjUyyWd80N5w
 
 {
-  "title": "Vue",
-  "description": "VUEEEEE",
-  "url": "https://vuejs.org",
-  "status": "LEARNING"
+  "categoryName": "asd",
+  "categoryData": []
 }
 
 ###
-
-DELETE http://localhost:5000/api/posts/61390048a97a331008066224
+//Delete category
+DELETE http://localhost:8080/api/categories/61539f19addaf108687d4a05
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM4NTEzYmViNzZkZmFiOWQ1NjlkMDYiLCJpYXQiOjE2MzExMjU1NjN9.0VzUrE5hfYeFTi8lBRmavbRVjtUYKOvRjUyyWd80N5w

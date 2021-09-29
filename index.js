@@ -4,6 +4,8 @@ const mongoose = require('mongoose')
 
 const authRouter = require('./routes/auth.js')
 const postRouter = require('./routes/post')
+const categoryRouter = require('./routes/category')
+const foodRouter = require('./routes/food')
 
 const connectDB = async () => {
     try {
@@ -24,6 +26,8 @@ app.use(express.json())
 
 app.use('/api/auth', authRouter)
 app.use('/api/posts', postRouter)
+app.use('/api/foods', foodRouter)
+app.use('/api/categories', categoryRouter)
 
 const PORT = process.env.PORT || 5000
 
