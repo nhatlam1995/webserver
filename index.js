@@ -6,6 +6,8 @@ const authRouter = require('./routes/auth.js')
 const postRouter = require('./routes/post')
 const categoryRouter = require('./routes/category')
 const foodRouter = require('./routes/food')
+const favoriteRouter = require('./routes/favorites')
+const orderRouter = require('./routes/order')
 
 const connectDB = async () => {
     try {
@@ -28,6 +30,8 @@ app.use('/api/auth', authRouter)
 app.use('/api/posts', postRouter)
 app.use('/api/foods', foodRouter)
 app.use('/api/categories', categoryRouter)
+app.use('/api/favorites', favoriteRouter)
+app.use('/api/orders', orderRouter)
 
 const PORT = process.env.PORT || 5000
 

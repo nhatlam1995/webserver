@@ -32,6 +32,12 @@ const FoodSchema = new Schema({
     categoryId: {
         type: Schema.Types.ObjectId,
         ref: 'categories'
+    },
+    isFavorite: {
+        type: Boolean,
+    },
+    quantity: {
+        type: Number,
     }
 })
 

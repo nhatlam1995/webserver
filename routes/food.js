@@ -1,13 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const verifyToken = require('../middleware/auth')
+const jwt = require('jsonwebtoken')
 
 const Food = require('../models/Food')
 const Category = require('../models/Category')
+const Favorites = require('../models/Favorites')
 
 router.get('/getFoodsList', verifyToken, async (req, res) => {
     const categoryId = req.query.category;
-    console.log(categoryId)
     const condition = categoryId ? { categoryId: { $eq: categoryId } } : {};
 
     try {
@@ -19,7 +20,7 @@ router.get('/getFoodsList', verifyToken, async (req, res) => {
     }
 })
 
-router.post('/:categoryId', verifyToken, async (req, res) => {
+router.post('/addFoodIntoCategory/:categoryId', verifyToken, async (req, res) => {
     const { url, weight, price, name, nation, status, description } = req.body;
     const { categoryId } = req.params;
 
@@ -47,7 +48,63 @@ router.post('/:categoryId', verifyToken, async (req, res) => {
 
         await newFood.save();
 
+        res.json({ success: true, message: 'Thêm food vào category thành công', newFood })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ success: false, message: 'Chưa có category' })
+    }
+})
+
+router.post('/addFoodIntoFavorite/', verifyToken, async (req, res) => {
+    const usertoken = req.headers.authorization;
+    const token = usertoken.split(' ');
+    const decoded = jwt.verify(token[1], 'lkj1vxcdsf9-wefgwe8eto');
+    console.log(decoded)
+    const { url, weight, price, name, nation, status, description } = req.body;
+
+    if (!name || !url || !weight || !price || !nation || !status)
+        return res.status(400).json({ success: false, message: 'Fill the information' })
+
+    try {
+        const favorites = await Favorites.findOne({ userId: decoded.userId })
+        console.log(favorites)
+        const newFood = new Food({
+            url,
+            weight,
+            price,
+            name,
+            nation,
+            status,
+            description,
+            isFavorite: true,
+        })
+
+        // const category = await Category.findById(categoryId)
+
+        favorites.favoritesData.push(newFood);
+
+        await favorites.save();
+
         res.json({ success: true, message: 'Thêm thành công', newFood })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ success: false, message: 'Internal server error' })
+    }
+})
+
+router.delete('/deleteFoodFromFavorite/:id', verifyToken, async (req, res) => {
+    const usertoken = req.headers.authorization;
+    const token = usertoken.split(' ');
+    const decoded = jwt.verify(token[1], 'lkj1vxcdsf9-wefgwe8eto');
+
+    try {
+        const favorite = await Favorites.findOne({ userId: decoded.userId }).updateOne({}, { $pull: { favoritesData: { _id: req.params.id } } })
+        console.log('a', favorite)
+
+        if (favorite.modifiedCount === 0)
+            return res.status(400).json({ success: false, message: "Lỗi nhẹ" })
+
+        res.json({ success: true, message: "Successful!", favorites: favorite })
     } catch (error) {
         console.log(error)
         res.status(500).json({ success: false, message: 'Internal server error' })
@@ -58,7 +115,7 @@ router.delete('/:id', verifyToken, async (req, res) => {
     try {
         const foodDeleteCondition = { _id: req.params.id }
         const category = await Food.find({ _id: req.params.id })
-        var cateId = category[0].categoryId.toString();
+        var cateId = category[0].categoryId;
         const foodInCategory = await Category.find({ _id: cateId }).updateOne({}, { $pull: { categoryData: { _id: req.params.id } } })
         console.log('Check delete in category', foodInCategory)
 
@@ -74,7 +131,7 @@ router.delete('/:id', verifyToken, async (req, res) => {
         res.json({ success: true, food: deletedFood })
     } catch (error) {
         console.log(error)
-        res.status(500).json({ success: false, message: 'Internal server error' })
+        res.status(500).json({ success: false, message: 'Không tìm thấy food' })
     }
 })
 

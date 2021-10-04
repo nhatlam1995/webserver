@@ -4,8 +4,8 @@ POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-  "username": "admin",
-  "password": "admin"
+  "username": "admin2",
+  "password": "admin2"
 }
 
 ###
@@ -21,46 +21,83 @@ Content-Type: application/json
 ###
 //Get all Foods or using ?category={categoryId}
 GET http://localhost:8080/api/foods/getFoodsList
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM4NTEzYmViNzZkZmFiOWQ1NjlkMDYiLCJpYXQiOjE2MzExMjU1NjN9.0VzUrE5hfYeFTi8lBRmavbRVjtUYKOvRjUyyWd80N5w
-
-###
-//Delete Foods in category
-DELETE http://localhost:8080/api/foods/6153aea7e3b5c33154690a62
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM4NTEzYmViNzZkZmFiOWQ1NjlkMDYiLCJpYXQiOjE2MzExMjU1NjN9.0VzUrE5hfYeFTi8lBRmavbRVjtUYKOvRjUyyWd80N5w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
 
 ###
 //Add food into category
-POST http://localhost:8080/api/foods/6153ae87e3b5c33154690a5e
+POST http://localhost:8080/api/foods/addFoodIntoCategory/6158d83028e5af6d8701d583
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM4NTEzYmViNzZkZmFiOWQ1NjlkMDYiLCJpYXQiOjE2MzExMjU1NjN9.0VzUrE5hfYeFTi8lBRmavbRVjtUYKOvRjUyyWd80N5w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
 
 {
     "url": "https://firebasestorage.googleapis.com/v0/b/android-e3098.appspot.com/o/Bitter-Gourd-Salted-Egg-300x300.jpeg?alt=media&token=ddb35300-94ac-446a-8baa-7293e4831c3e",
     "weight": "500gr",
     "price": 90000,
-    "name": "AAAA",
+    "name": "Sets",
     "nation": "America",
     "status": "NEW",
     "description": "Stir Fried Rice Vermicelli with Salted Egg (Vegetarian)"
 }
 
 ###
+//Delete Foods in category
+//Loiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+DELETE http://localhost:8080/api/foods/6158d83a28e5af6d8701d593
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+
+###
 //Get categorylist
 GET http://localhost:8080/api/categories
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM4NTEzYmViNzZkZmFiOWQ1NjlkMDYiLCJpYXQiOjE2MzExMjU1NjN9.0VzUrE5hfYeFTi8lBRmavbRVjtUYKOvRjUyyWd80N5w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
 
 ###
 //Add new category
 POST http://localhost:8080/api/categories
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM4NTEzYmViNzZkZmFiOWQ1NjlkMDYiLCJpYXQiOjE2MzExMjU1NjN9.0VzUrE5hfYeFTi8lBRmavbRVjtUYKOvRjUyyWd80N5w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
 
 {
-  "categoryName": "asd",
+  "categoryName": "Sets",
   "categoryData": []
 }
 
 ###
 //Delete category
-DELETE http://localhost:8080/api/categories/61539f19addaf108687d4a05
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTM4NTEzYmViNzZkZmFiOWQ1NjlkMDYiLCJpYXQiOjE2MzExMjU1NjN9.0VzUrE5hfYeFTi8lBRmavbRVjtUYKOvRjUyyWd80N5w
+DELETE http://localhost:8080/api/categories/6158d83028e5af6d8701d583
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+
+###
+GET http://localhost:8080/api/favorites/getFavorites
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+
+###
+POST http://localhost:8080/api/favorites/createFavorites
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+
+{
+  "favoritesData": []
+}
+
+###
+DELETE http://localhost:8080/api/favorites/deleteFavorites/6158cdd0ac222f687ecfa42a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+
+###
+POST http://localhost:8080/api/foods/addFoodIntoFavorite/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+
+{
+    "url": "https://firebasestorage.googleapis.com/v0/b/android-e3098.appspot.com/o/Bitter-Gourd-Salted-Egg-300x300.jpeg?alt=media&token=ddb35300-94ac-446a-8baa-7293e4831c3e",
+    "weight": "500gr",
+    "price": 90000,
+    "name": "BBBB",
+    "nation": "America",
+    "status": "NEW",
+    "description": "Stir Fried Rice Vermicelli with Salted Egg (Vegetarian)"
+}
+
+###
+DELETE http://localhost:8080/api/foods/deleteFoodFromFavorite/615b4a42e8e6a3eaeec2310b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
