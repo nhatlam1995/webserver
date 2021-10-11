@@ -8,9 +8,9 @@ const OrderSchema = new Schema({
         required: true
     },
     createdAt: {
-        type: Date,
-        default: Date.now
-    },
+		type: Date,
+		default: Date.now
+	},
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'users'

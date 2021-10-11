@@ -2,13 +2,14 @@ const express = require('express')
 const router = express.Router()
 const verifyToken = require('../middleware/auth')
 const jwt = require('jsonwebtoken')
+const decodeToken = require('../services/service')
 
 const Favorites = require('../models/Favorites')
 const User = require('../models/User')
 
 router.get('/getFavorites', verifyToken, async (req, res) => {
     try {
-        var favoriteLists = await Favorites.find({ user: req.userId })
+        var favoriteLists = await Favorites.find({ userId: req.userId })
         res.json({ success: true, favoriteLists })
     } catch (error) {
         console.log(error)
@@ -17,9 +18,7 @@ router.get('/getFavorites', verifyToken, async (req, res) => {
 })
 
 router.post('/createFavorites', verifyToken, async (req, res) => {
-    const usertoken = req.headers.authorization;
-    const token = usertoken.split(' ');
-    const decoded = jwt.verify(token[1], 'lkj1vxcdsf9-wefgwe8eto');
+    const decoded = decodeToken(req)
     try {
         const favorite = await Favorites.findOne({ userId: decoded.userId })
 

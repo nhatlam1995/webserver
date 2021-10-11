@@ -3,6 +3,7 @@ const router = express.Router()
 const argon2 = require('argon2')
 const jwt = require('jsonwebtoken')
 const verifyToken = require('../middleware/auth')
+const forgotPassMail = require('../middleware/forgotPassMail')
 
 const User = require('../models/User')
 
@@ -25,17 +26,17 @@ router.get('/', verifyToken, async (req, res) => {
 // @desc Register user
 // @access Public
 router.post('/register', async (req, res) => {
-	const { username, password } = req.body
+	const { email, password } = req.body
 
 	// Simple validation
-	if (!username || !password)
+	if (!email || !password)
 		return res
 			.status(400)
 			.json({ success: false, message: 'Missing username and/or password' })
 
 	try {
 		// Check for existing user
-		const user = await User.findOne({ username })
+		const user = await User.findOne({ email })
 
 		if (user)
 			return res
@@ -108,6 +109,21 @@ router.post('/login', async (req, res) => {
 		console.log(error)
 		res.status(500).json({ success: false, message: error })
 	}
+})
+
+router.post('/sendemailforgotpassword', async (req, res) => {
+	const { email } = req.body
+
+	if (!email) return res.status(400).json({ success: false, message: 'Xin hãy nhập mail' })
+
+	const user = await User.findOne({ email })
+	if (!user) return res.status(400).json({ success: false, message: 'Email Chưa được đăng kí' })
+
+	const accessToken = jwt.sign({ _id: user._id }, 'lkj1vxcdsf9-wefgwe8eto')
+
+	forgotPassMail(email, accessToken)
+
+	res.json({ success: true, message: 'Nhận email thành công', accessToken, email })
 })
 
 module.exports = router

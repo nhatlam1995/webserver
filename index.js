@@ -8,6 +8,7 @@ const categoryRouter = require('./routes/category')
 const foodRouter = require('./routes/food')
 const favoriteRouter = require('./routes/favorites')
 const orderRouter = require('./routes/order')
+const forgotPassRouter = require('./routes/passwordReset')
 
 const connectDB = async () => {
     try {
@@ -32,6 +33,7 @@ app.use('/api/foods', foodRouter)
 app.use('/api/categories', categoryRouter)
 app.use('/api/favorites', favoriteRouter)
 app.use('/api/orders', orderRouter)
+app.use('/api/forgotPass', forgotPassRouter)
 
 const PORT = process.env.PORT || 5000
 

@@ -41,7 +41,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y
 
 ###
 //Delete Foods in category
-//Loiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
 DELETE http://localhost:8080/api/foods/6158d83a28e5af6d8701d593
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
 
@@ -101,3 +100,61 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y
 ###
 DELETE http://localhost:8080/api/foods/deleteFoodFromFavorite/615b4a42e8e6a3eaeec2310b
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+
+###
+GET http://localhost:8080/api/orders/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M1MmFjMjIyZjY4N2VjZmEzNzQiLCJ1c2VybmFtZSI6ImFkbWluMSIsImlhdCI6MTYzMzg0MzE5NH0.donMzf-sE8Y7sV-QWjqEVcXr1izNJVdWyGaABiI8w-E
+###
+POST http://localhost:8080/api/orders/createOrders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M1MmFjMjIyZjY4N2VjZmEzNzQiLCJ1c2VybmFtZSI6ImFkbWluMSIsImlhdCI6MTYzMzg0MzE5NH0.donMzf-sE8Y7sV-QWjqEVcXr1izNJVdWyGaABiI8w-E
+
+{
+  "total": 155000,
+  "orderData": [
+    {
+      "id": "dessert03",
+      "url": "https://firebasestorage.googleapis.com/v0/b/android-e3098.appspot.com/o/Soy-Custard.jpeg?alt=media&token=42bd17b3-286f-4e48-b158-73049ecdeff3",
+      "weight": "500gr",
+      "price": 35000,
+      "name": "Tau Fu Fah",
+      "nation": "Austria",
+      "status": "NEW",
+      "quantity": 1,
+      "description": "Brown Sugar Separated"
+    },
+    {
+      "id": "drink03",
+      "url": "https://firebasestorage.googleapis.com/v0/b/android-e3098.appspot.com/o/Mineral-Water.jpeg?alt=media&token=9b706cf6-b680-4392-bd4a-aa60f9dee50c",
+      "weight": "500ml",
+      "price": 30000,
+      "name": "Mineral Water 500ml",
+      "nation": "Vietnam",
+      "status": "NEW",
+      "quantity": 1,
+      "description": ""
+    },
+    {
+      "id": "set14",
+      "url": "https://firebasestorage.googleapis.com/v0/b/android-e3098.appspot.com/o/Steam-White-Tofu-Set.jpeg?alt=media&token=9ed181e5-2206-421f-af8b-026102ad079d",
+      "weight": "500gr",
+      "price": 90000,
+      "name": "Steamed Soft Tofu Set",
+      "nation": "Vietnam",
+      "status": "NEW",
+      "quantity": 1,
+      "description": "Soft Tofu Steamed and Topped with Soy Chunks. Set Comes With Rice of Your Choice, 1 Stir Fried Vege, 1 Salad (Vegetarian)."
+    }
+  ]
+}
+
+###
+DELETE http://localhost:8080/api/orders/deleteOrdersByUserId/615fa92c671143dcc1a74a1b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+
+###
+POST http://localhost:8080/api/forgotPass/
+
+{
+  "email": "nhatlam1695@gmail.com"
+}

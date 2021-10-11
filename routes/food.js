@@ -56,9 +56,7 @@ router.post('/addFoodIntoCategory/:categoryId', verifyToken, async (req, res) =>
 })
 
 router.post('/addFoodIntoFavorite/', verifyToken, async (req, res) => {
-    const usertoken = req.headers.authorization;
-    const token = usertoken.split(' ');
-    const decoded = jwt.verify(token[1], 'lkj1vxcdsf9-wefgwe8eto');
+    const decoded = decodeToken(req)
     console.log(decoded)
     const { url, weight, price, name, nation, status, description } = req.body;
 
@@ -93,9 +91,7 @@ router.post('/addFoodIntoFavorite/', verifyToken, async (req, res) => {
 })
 
 router.delete('/deleteFoodFromFavorite/:id', verifyToken, async (req, res) => {
-    const usertoken = req.headers.authorization;
-    const token = usertoken.split(' ');
-    const decoded = jwt.verify(token[1], 'lkj1vxcdsf9-wefgwe8eto');
+    const decoded = decodeToken(req)
 
     try {
         const favorite = await Favorites.findOne({ userId: decoded.userId }).updateOne({}, { $pull: { favoritesData: { _id: req.params.id } } })
@@ -123,7 +119,7 @@ router.delete('/:id', verifyToken, async (req, res) => {
 
         // User not authorised or post not found
         if (!deletedFood)
-            return res.status(401).json({
+            return res.status(400).json({
                 success: false,
                 message: 'Food not found or user not authorised'
             })
