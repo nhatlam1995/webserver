@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
 const verifyToken = require('../middleware/auth')
-const jwt = require('jsonwebtoken')
 
 const Food = require('../models/Food')
 const Category = require('../models/Category')
 const Favorites = require('../models/Favorites')
+
+const decodeToken = require('../services/service')
 
 router.get('/getFoodsList', verifyToken, async (req, res) => {
     const categoryId = req.query.category;
@@ -28,6 +29,11 @@ router.post('/addFoodIntoCategory/:categoryId', verifyToken, async (req, res) =>
         return res.status(400).json({ success: false, message: 'Fill the information' })
 
     try {
+        const categoryCheck = await Food.findOne({ "categoryId": categoryId, "name": name, "url": url })
+        console.log(categoryCheck)
+        if (categoryCheck)
+            return res.status(400).json({ success: false, message: 'Category name / url already exists' })
+
         const category = await Category.findOne({ _id: categoryId })
         const newFood = new Food({
             url,

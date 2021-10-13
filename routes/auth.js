@@ -3,7 +3,6 @@ const router = express.Router()
 const argon2 = require('argon2')
 const jwt = require('jsonwebtoken')
 const verifyToken = require('../middleware/auth')
-const forgotPassMail = require('../middleware/forgotPassMail')
 
 const User = require('../models/User')
 
@@ -26,31 +25,52 @@ router.get('/', verifyToken, async (req, res) => {
 // @desc Register user
 // @access Public
 router.post('/register', async (req, res) => {
-	const { email, password } = req.body
+	const { fullname, email, phonenumber, password } = req.body
 
 	// Simple validation
-	if (!email || !password)
+	if (!fullname)
 		return res
 			.status(400)
-			.json({ success: false, message: 'Missing username and/or password' })
+			.json({ success: false, message: 'Missing fullname field' })
+
+	else if (!email)
+		return res
+			.status(400)
+			.json({ success: false, message: 'Missing email field' })
+
+	else if (!phonenumber)
+		return res
+			.status(400)
+			.json({ success: false, message: 'Missing phonenumber field' })
+
+	else if (!password)
+		return res
+			.status(400)
+			.json({ success: false, message: 'Missing password' })
 
 	try {
 		// Check for existing user
-		const user = await User.findOne({ email })
+		const userMail = await User.findOne({ email })
+		const userPhone = await User.findOne({ phonenumber })
 
-		if (user)
+		if (userMail)
 			return res
 				.status(400)
-				.json({ success: false, message: 'Username already taken' })
+				.json({ success: false, message: 'Email already taken' })
+
+		if (userPhone)
+			return res
+				.status(400)
+				.json({ success: false, message: 'Phone number already taken' })
 
 		// All good
 		const hashedPassword = await argon2.hash(password)
-		const newUser = new User({ username, password: hashedPassword })
+		const newUser = new User({ fullname, email, phonenumber, password: hashedPassword, })
 		await newUser.save()
 
 		// Return token
 		const accessToken = jwt.sign(
-			{ userId: newUser._id },
+			{ userId: user._id, username: user.email, fullname: user.fullname, phone: user.phonenumber },
 			'lkj1vxcdsf9-wefgwe8eto'
 		)
 
@@ -70,17 +90,17 @@ router.post('/register', async (req, res) => {
 // @desc Login user
 // @access Public
 router.post('/login', async (req, res) => {
-	const { username, password } = req.body
+	const { email, password } = req.body
 
 	// Simple validation
-	if (!username || !password)
+	if (!email || !password)
 		return res
 			.status(400)
-			.json({ success: false, message: 'Missing username and/or password' })
+			.json({ success: false, message: 'Missing email and/or password' })
 
 	try {
 		// Check for existing user
-		const user = await User.findOne({ username })
+		const user = await User.findOne({ email })
 		if (!user)
 			return res
 				.status(400)
@@ -96,34 +116,19 @@ router.post('/login', async (req, res) => {
 		// All good
 		// Return token
 		const accessToken = jwt.sign(
-			{ userId: user._id, username: user.username },
+			{ userId: user._id, username: user.email, fullname: user.fullname, phone: user.phonenumber },
 			'lkj1vxcdsf9-wefgwe8eto'
 		)
 
 		res.json({
 			success: true,
 			message: 'User logged in successfully',
-			data: { token: accessToken },
+			data: { userId: user._id, usermail: user.email, fullname: user.fullname, phone: user.phonenumber, token: accessToken }
 		})
 	} catch (error) {
 		console.log(error)
 		res.status(500).json({ success: false, message: error })
 	}
-})
-
-router.post('/sendemailforgotpassword', async (req, res) => {
-	const { email } = req.body
-
-	if (!email) return res.status(400).json({ success: false, message: 'Xin hãy nhập mail' })
-
-	const user = await User.findOne({ email })
-	if (!user) return res.status(400).json({ success: false, message: 'Email Chưa được đăng kí' })
-
-	const accessToken = jwt.sign({ _id: user._id }, 'lkj1vxcdsf9-wefgwe8eto')
-
-	forgotPassMail(email, accessToken)
-
-	res.json({ success: true, message: 'Nhận email thành công', accessToken, email })
 })
 
 module.exports = router

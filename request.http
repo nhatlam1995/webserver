@@ -1,11 +1,14 @@
-###
+#############################################################################################
+###Authentication###
 //Register new account
 POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-  "username": "admin2",
-  "password": "admin2"
+  "fullname": "Nguyễn Hoàng Long",
+  "email":"hoanglong2012@gmail.com",
+  "phonenumber":"0123456789",
+  "password": "admin1"
 }
 
 ###
@@ -14,46 +17,29 @@ POST http://localhost:8080/api/auth/login
 Content-Type: application/json
 
 {
-  "username": "admin",
+  "email": "nhatlam1695@gmail.com",
   "password": "admin"
 }
 
 ###
-//Get all Foods or using ?category={categoryId}
-GET http://localhost:8080/api/foods/getFoodsList
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
-
-###
-//Add food into category
-POST http://localhost:8080/api/foods/addFoodIntoCategory/6158d83028e5af6d8701d583
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+//Forgot passwor
+POST http://localhost:8080/api/forgotPass/
 
 {
-    "url": "https://firebasestorage.googleapis.com/v0/b/android-e3098.appspot.com/o/Bitter-Gourd-Salted-Egg-300x300.jpeg?alt=media&token=ddb35300-94ac-446a-8baa-7293e4831c3e",
-    "weight": "500gr",
-    "price": 90000,
-    "name": "Sets",
-    "nation": "America",
-    "status": "NEW",
-    "description": "Stir Fried Rice Vermicelli with Salted Egg (Vegetarian)"
+  "email": "nhatlam1695@gmail.com"
 }
 
-###
-//Delete Foods in category
-DELETE http://localhost:8080/api/foods/6158d83a28e5af6d8701d593
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
-
-###
+#############################################################################################
+###Category###
 //Get categorylist
 GET http://localhost:8080/api/categories
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2MGFlNzdlMzUzOWQyZmZjYjQ2NzkiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsImZ1bGxuYW1lIjoiTmd1eeG7hW4gTmjhuq10IExhbSIsInBob25lIjoiMDM4OTkzNTM3MSIsImlhdCI6MTYzNDA3Nzk1OH0.WUYr0XPdFptbIFxpzrXEHW7emkEZZbVe7I4iaT7PTl0
 
 ###
 //Add new category
 POST http://localhost:8080/api/categories
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2MGFlNzdlMzUzOWQyZmZjYjQ2NzkiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsImZ1bGxuYW1lIjoiTmd1eeG7hW4gTmjhuq10IExhbSIsInBob25lIjoiMDM4OTkzNTM3MSIsImlhdCI6MTYzNDA3Nzk1OH0.WUYr0XPdFptbIFxpzrXEHW7emkEZZbVe7I4iaT7PTl0
 
 {
   "categoryName": "Sets",
@@ -62,17 +48,45 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y
 
 ###
 //Delete category
-DELETE http://localhost:8080/api/categories/6158d83028e5af6d8701d583
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+DELETE http://localhost:8080/api/categories/6166278bfee5ecd9ac85ea90
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2MGFlNzdlMzUzOWQyZmZjYjQ2NzkiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsImZ1bGxuYW1lIjoiTmd1eeG7hW4gTmjhuq10IExhbSIsInBob25lIjoiMDM4OTkzNTM3MSIsImlhdCI6MTYzNDA3Nzk1OH0.WUYr0XPdFptbIFxpzrXEHW7emkEZZbVe7I4iaT7PTl0
+
+#############################################################################################
+###Food###
+//Get all Foods or using ?category={categoryId}
+GET http://localhost:8080/api/foods/getFoodsList
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2MGFlNzdlMzUzOWQyZmZjYjQ2NzkiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsImZ1bGxuYW1lIjoiTmd1eeG7hW4gTmjhuq10IExhbSIsInBob25lIjoiMDM4OTkzNTM3MSIsImlhdCI6MTYzNDA3Nzk1OH0.WUYr0XPdFptbIFxpzrXEHW7emkEZZbVe7I4iaT7PTl0
 
 ###
+//Add food into category
+POST http://localhost:8080/api/foods/addFoodIntoCategory/61660fcc539b3b5539800301
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2MGFlNzdlMzUzOWQyZmZjYjQ2NzkiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsImZ1bGxuYW1lIjoiTmd1eeG7hW4gTmjhuq10IExhbSIsInBob25lIjoiMDM4OTkzNTM3MSIsImlhdCI6MTYzNDA3Nzk1OH0.WUYr0XPdFptbIFxpzrXEHW7emkEZZbVe7I4iaT7PTl0
+
+{
+  "url": "https://firebasestorage.googleapis.com/v0/b/android-e3098.appspot.com/o/Soy-Custard.jpeg?alt=media&token=42bd17b3-286f-4e48-b158-73049ecdeff3",
+  "weight": "500gr",
+  "price": 35000,
+  "name": "Tau Fu Fah",
+  "nation": "Austria",
+  "status": "NEW",
+  "description": "Brown Sugar Separated"
+}
+
+###
+//Delete Foods in category
+DELETE http://localhost:8080/api/foods/61661e834144cd9286ae7cae
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2MGFlNzdlMzUzOWQyZmZjYjQ2NzkiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsImZ1bGxuYW1lIjoiTmd1eeG7hW4gTmjhuq10IExhbSIsInBob25lIjoiMDM4OTkzNTM3MSIsImlhdCI6MTYzNDA3Nzk1OH0.WUYr0XPdFptbIFxpzrXEHW7emkEZZbVe7I4iaT7PTl0
+
+#############################################################################################
+###Favorites###
 GET http://localhost:8080/api/favorites/getFavorites
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2MGFlNzdlMzUzOWQyZmZjYjQ2NzkiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsImZ1bGxuYW1lIjoiTmd1eeG7hW4gTmjhuq10IExhbSIsInBob25lIjoiMDM4OTkzNTM3MSIsImlhdCI6MTYzNDA3Nzk1OH0.WUYr0XPdFptbIFxpzrXEHW7emkEZZbVe7I4iaT7PTl0
 
 ###
 POST http://localhost:8080/api/favorites/createFavorites
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2MGFlNzdlMzUzOWQyZmZjYjQ2NzkiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsImZ1bGxuYW1lIjoiTmd1eeG7hW4gTmjhuq10IExhbSIsInBob25lIjoiMDM4OTkzNTM3MSIsImlhdCI6MTYzNDA3Nzk1OH0.WUYr0XPdFptbIFxpzrXEHW7emkEZZbVe7I4iaT7PTl0
 
 {
   "favoritesData": []
@@ -80,30 +94,32 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y
 
 ###
 DELETE http://localhost:8080/api/favorites/deleteFavorites/6158cdd0ac222f687ecfa42a
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2MGFlNzdlMzUzOWQyZmZjYjQ2NzkiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsImZ1bGxuYW1lIjoiTmd1eeG7hW4gTmjhuq10IExhbSIsInBob25lIjoiMDM4OTkzNTM3MSIsImlhdCI6MTYzNDA3Nzk1OH0.WUYr0XPdFptbIFxpzrXEHW7emkEZZbVe7I4iaT7PTl0
 
 ###
 POST http://localhost:8080/api/foods/addFoodIntoFavorite/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2MGFlNzdlMzUzOWQyZmZjYjQ2NzkiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsImZ1bGxuYW1lIjoiTmd1eeG7hW4gTmjhuq10IExhbSIsInBob25lIjoiMDM4OTkzNTM3MSIsImlhdCI6MTYzNDA3Nzk1OH0.WUYr0XPdFptbIFxpzrXEHW7emkEZZbVe7I4iaT7PTl0
 
 {
-    "url": "https://firebasestorage.googleapis.com/v0/b/android-e3098.appspot.com/o/Bitter-Gourd-Salted-Egg-300x300.jpeg?alt=media&token=ddb35300-94ac-446a-8baa-7293e4831c3e",
-    "weight": "500gr",
-    "price": 90000,
-    "name": "BBBB",
-    "nation": "America",
-    "status": "NEW",
-    "description": "Stir Fried Rice Vermicelli with Salted Egg (Vegetarian)"
+  "url": "https://firebasestorage.googleapis.com/v0/b/android-e3098.appspot.com/o/Asam-Fish-and-Steam-Egg-600x600.jpeg?alt=media&token=c4ef379a-3715-44ef-a90e-435f5c6bdfde",
+  "weight": "Combos",
+  "price": 126000,
+  "name": "Asam Fish + Steamed Egg Set",
+  "nation": "Malaysia",
+  "status": "NEW",
+  "description": "Steamed High Protein Fish Fillet Topped with Ginger Paste. Set Comes With Rice of Your Choice, 1 Stir Fried Vege, 1 Salad."
 }
 
 ###
 DELETE http://localhost:8080/api/foods/deleteFoodFromFavorite/615b4a42e8e6a3eaeec2310b
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2MGFlNzdlMzUzOWQyZmZjYjQ2NzkiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsImZ1bGxuYW1lIjoiTmd1eeG7hW4gTmjhuq10IExhbSIsInBob25lIjoiMDM4OTkzNTM3MSIsImlhdCI6MTYzNDA3Nzk1OH0.WUYr0XPdFptbIFxpzrXEHW7emkEZZbVe7I4iaT7PTl0
 
-###
+#############################################################################################
+###Orders###
 GET http://localhost:8080/api/orders/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M1MmFjMjIyZjY4N2VjZmEzNzQiLCJ1c2VybmFtZSI6ImFkbWluMSIsImlhdCI6MTYzMzg0MzE5NH0.donMzf-sE8Y7sV-QWjqEVcXr1izNJVdWyGaABiI8w-E
+
 ###
 POST http://localhost:8080/api/orders/createOrders
 Content-Type: application/json
@@ -150,11 +166,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y
 
 ###
 DELETE http://localhost:8080/api/orders/deleteOrdersByUserId/615fa92c671143dcc1a74a1b
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTU4Y2M0N2FjMjIyZjY4N2VjZmEzNzAiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjMzMjA5OTg2fQ.8V7qXTS402keustExzCzpFLfIfrNUNxa2qhiLgxB2U8
-
-###
-POST http://localhost:8080/api/forgotPass/
-
-{
-  "email": "nhatlam1695@gmail.com"
-}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTY2MGFlNzdlMzUzOWQyZmZjYjQ2NzkiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsImZ1bGxuYW1lIjoiTmd1eeG7hW4gTmjhuq10IExhbSIsInBob25lIjoiMDM4OTkzNTM3MSIsImlhdCI6MTYzNDA3Nzk1OH0.WUYr0XPdFptbIFxpzrXEHW7emkEZZbVe7I4iaT7PTl0
