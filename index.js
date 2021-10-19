@@ -12,7 +12,7 @@ const forgotPassRouter = require('./routes/passwordReset')
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(`mongodb+srv://quanlilophoc:quanlilophoc@studentmanagement.rm1ko.mongodb.net/studentManagement?retryWrites=true&w=majority`)
+        await mongoose.connect(process.env.DB_LINK)
 
         console.log('MongoDB connected')
     } catch (error) {

@@ -11,11 +11,7 @@ const OrderSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-    userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'users'
-    },
-    orderData: [Food, {
+    orderDetail: [Food, {
         quantity: {
             type: Number,
             require: true

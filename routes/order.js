@@ -10,7 +10,7 @@ const Order = require('../models/Order')
 router.get('/', verifyToken, async (req, res) => {
     const decoded = decodeToken(req)
     try {
-        const history = await Order.find({ userId: decoded.userId })
+        const history = await User.find({ _id: decoded.userId })
         res.json({ success: true, history })
     } catch (error) {
         console.log(error)
@@ -19,26 +19,29 @@ router.get('/', verifyToken, async (req, res) => {
 })
 
 router.post('/createOrders', verifyToken, async (req, res) => {
-    const { total, orderData } = req.body;
+    const { total, orderDetail, createdAt, } = req.body;
+
     const decoded = decodeToken(req)
-    if (!orderData || !total)
+    if (!orderDetail || !total)
         return res.status(400).json({ success: false, message: "No order data" })
 
     try {
-        const order = await Order.find({ userId: decoded.userId })
-        console.log(order)
-        if (!order)
+        const userCheck = await User.findOne({ _id: decoded.userId })
+        console.log(userCheck)
+        if (!userCheck)
             return res.status(400).json({ success: false, message: 'Check userId' })
 
         const newOrders = new Order({
             total,
-            orderData,
-            userId: req.userId,
+            createdAt,
+            orderDetail
         })
 
-        await newOrders.save();
+        userCheck.orderData.push(newOrders);
 
-        res.json({ success: true, message: 'Success', orderData })
+        await userCheck.save();
+
+        res.json({ success: true, message: 'Success', userCheck })
 
     } catch (error) {
         console.log(error)

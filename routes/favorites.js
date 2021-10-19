@@ -4,44 +4,25 @@ const verifyToken = require('../middleware/auth')
 const jwt = require('jsonwebtoken')
 const decodeToken = require('../services/service')
 
-const Favorites = require('../models/Favorites')
 const User = require('../models/User')
 
 router.get('/getFavorites', verifyToken, async (req, res) => {
+    const decode = decodeToken(req)
     try {
-        var favoriteLists = await Favorites.find({ userId: req.userId })
-        res.json({ success: true, favoriteLists })
+        var userCheckFavorite = await User.findOne({ _id: decode.userId })
+
+        if (userCheckFavorite === [] || userCheckFavorite === null) return res.json({ success: true, message: "Empty data" })
+        else res.json({ success: true, userCheckFavorite })
     } catch (error) {
         console.log(error)
         res.status(500).json({ success: false, message: 'Wrong categoryId' })
     }
 })
 
-router.post('/createFavorites', verifyToken, async (req, res) => {
-    const decoded = decodeToken(req)
-    try {
-        const favorite = await Favorites.findOne({ userId: decoded.userId })
-
-        if (favorite)
-            return res.status(400).json({ success: false, message: 'Already name' });
-
-        const newFavorite = new Favorites({
-            userId: req.userId
-        })
-
-        await newFavorite.save();
-
-        res.json({ success: true, message: 'Happy learning!', favorites: newFavorite })
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({ success: false, message: 'Internal server error' })
-    }
-})
-
 router.delete('/deleteFavorites/:id', verifyToken, async (req, res) => {
     try {
         const favoritesDeleteCondition = { _id: req.params.id, user: req.userId }
-        const deletedfavorites = await Favorites.findOneAndDelete(favoritesDeleteCondition)
+        const deletedfavorites = await User.findOne({_id: decode.userId})
 
         // User not authorised or post not found
         if (!deletedfavorites)

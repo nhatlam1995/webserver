@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const verifyToken = require('../middleware/auth')
 
 const User = require('../models/User')
+const Order = require('../models/Order')
 
 // @route GET api/auth
 // @desc Check if user is logged in
@@ -25,7 +26,7 @@ router.get('/', verifyToken, async (req, res) => {
 // @desc Register user
 // @access Public
 router.post('/register', async (req, res) => {
-	const { fullname, email, phonenumber, password } = req.body
+	const { fullname, email, phonenumber, password, orderData, favoritesData } = req.body
 
 	// Simple validation
 	if (!fullname)
@@ -65,13 +66,14 @@ router.post('/register', async (req, res) => {
 
 		// All good
 		const hashedPassword = await argon2.hash(password)
-		const newUser = new User({ fullname, email, phonenumber, password: hashedPassword, })
+		const newUser = new User({ fullname, email, phonenumber, password: hashedPassword, favoritesData: [] })
+		console.log(newUser)
 		await newUser.save()
 
 		// Return token
 		const accessToken = jwt.sign(
-			{ userId: user._id, username: user.email, fullname: user.fullname, phone: user.phonenumber },
-			'lkj1vxcdsf9-wefgwe8eto'
+			{ userId: newUser._id, username: newUser.email, fullname: newUser.fullname, phone: newUser.phonenumber },
+			process.env.ACCESS_TOKEN_SECRET
 		)
 
 		res.json({
@@ -117,7 +119,7 @@ router.post('/login', async (req, res) => {
 		// Return token
 		const accessToken = jwt.sign(
 			{ userId: user._id, username: user.email, fullname: user.fullname, phone: user.phonenumber },
-			'lkj1vxcdsf9-wefgwe8eto'
+			process.env.ACCESS_TOKEN_SECRET
 		)
 
 		res.json({

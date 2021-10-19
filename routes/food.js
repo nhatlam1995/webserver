@@ -4,7 +4,7 @@ const verifyToken = require('../middleware/auth')
 
 const Food = require('../models/Food')
 const Category = require('../models/Category')
-const Favorites = require('../models/Favorites')
+const User = require('../models/User')
 
 const decodeToken = require('../services/service')
 
@@ -61,38 +61,24 @@ router.post('/addFoodIntoCategory/:categoryId', verifyToken, async (req, res) =>
     }
 })
 
-router.post('/addFoodIntoFavorite/', verifyToken, async (req, res) => {
+router.post('/addFoodIntoFavorite/:foodId', verifyToken, async (req, res) => {
     const decoded = decodeToken(req)
-    console.log(decoded)
-    const { url, weight, price, name, nation, status, description } = req.body;
-
-    if (!name || !url || !weight || !price || !nation || !status)
-        return res.status(400).json({ success: false, message: 'Fill the information' })
+    console.log(decoded.userId)
 
     try {
-        const favorites = await Favorites.findOne({ userId: decoded.userId })
-        console.log(favorites)
-        const newFood = new Food({
-            url,
-            weight,
-            price,
-            name,
-            nation,
-            status,
-            description,
-            isFavorite: true,
-        })
+        const userCheck = await User.findOne({ _id: decoded.userId })
+        const foodCheck = await Food.findById(req.params.foodId)
 
         // const category = await Category.findById(categoryId)
 
-        favorites.favoritesData.push(newFood);
+        userCheck.favoritesData.push(foodCheck);
 
-        await favorites.save();
+        await userCheck.save();
 
-        res.json({ success: true, message: 'Thêm thành công', newFood })
+        res.json({ success: true, message: 'Thêm thành công', foodCheck })
     } catch (error) {
         console.log(error)
-        res.status(500).json({ success: false, message: 'Internal server error' })
+        res.status(500).json({ success: false, message: 'Favorite data hasnt created yet' })
     }
 })
 
