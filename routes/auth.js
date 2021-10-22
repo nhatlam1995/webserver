@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken')
 const verifyToken = require('../middleware/auth')
 
 const User = require('../models/User')
-const Order = require('../models/Order')
 
 // @route GET api/auth
 // @desc Check if user is logged in
@@ -26,7 +25,7 @@ router.get('/', verifyToken, async (req, res) => {
 // @desc Register user
 // @access Public
 router.post('/register', async (req, res) => {
-	const { fullname, email, phonenumber, password, orderData, favoritesData } = req.body
+	const { fullname, email, phonenumber, password, role } = req.body
 
 	// Simple validation
 	if (!fullname)
@@ -49,6 +48,11 @@ router.post('/register', async (req, res) => {
 			.status(400)
 			.json({ success: false, message: 'Missing password' })
 
+	else if (!role)
+		return res
+			.status(400)
+			.json({ success: false, message: 'Missing role' })
+
 	try {
 		// Check for existing user
 		const userMail = await User.findOne({ email })
@@ -66,13 +70,13 @@ router.post('/register', async (req, res) => {
 
 		// All good
 		const hashedPassword = await argon2.hash(password)
-		const newUser = new User({ fullname, email, phonenumber, password: hashedPassword, favoritesData: [] })
+		const newUser = new User({ fullname, email, phonenumber, password: hashedPassword, role })
 		console.log(newUser)
 		await newUser.save()
 
 		// Return token
 		const accessToken = jwt.sign(
-			{ userId: newUser._id, username: newUser.email, fullname: newUser.fullname, phone: newUser.phonenumber },
+			{ userId: newUser._id, username: newUser.email, role: newUser.role },
 			process.env.ACCESS_TOKEN_SECRET
 		)
 
@@ -118,14 +122,14 @@ router.post('/login', async (req, res) => {
 		// All good
 		// Return token
 		const accessToken = jwt.sign(
-			{ userId: user._id, username: user.email, fullname: user.fullname, phone: user.phonenumber },
+			{ userId: user._id, username: user.email, role: user.role },
 			process.env.ACCESS_TOKEN_SECRET
 		)
 
 		res.json({
 			success: true,
 			message: 'User logged in successfully',
-			data: { userId: user._id, usermail: user.email, fullname: user.fullname, phone: user.phonenumber, token: accessToken }
+			data: { userId: user._id, usermail: user.email, token: accessToken }
 		})
 	} catch (error) {
 		console.log(error)

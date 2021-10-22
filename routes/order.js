@@ -10,7 +10,7 @@ const Order = require('../models/Order')
 router.get('/', verifyToken, async (req, res) => {
     const decoded = decodeToken(req)
     try {
-        const history = await User.find({ _id: decoded.userId })
+        const history = await User.find({ _id: decoded.userId }).select('orderData')
         res.json({ success: true, history })
     } catch (error) {
         console.log(error)
@@ -19,7 +19,7 @@ router.get('/', verifyToken, async (req, res) => {
 })
 
 router.post('/createOrders', verifyToken, async (req, res) => {
-    const { total, orderDetail, createdAt, } = req.body;
+    const { total, orderDetail, createdAt, points } = req.body;
 
     const decoded = decodeToken(req)
     if (!orderDetail || !total)
@@ -31,10 +31,15 @@ router.post('/createOrders', verifyToken, async (req, res) => {
         if (!userCheck)
             return res.status(400).json({ success: false, message: 'Check userId' })
 
+        const point = await User.findOneAndUpdate({ _id: decoded.userId }, { $inc: { memberPoints: points } })
+
+        console.log(point)
+
         const newOrders = new Order({
             total,
             createdAt,
-            orderDetail
+            orderDetail,
+            points
         })
 
         userCheck.orderData.push(newOrders);
@@ -49,23 +54,23 @@ router.post('/createOrders', verifyToken, async (req, res) => {
     }
 })
 
-router.delete('/deleteOrdersByUserId/:id', verifyToken, async (req, res) => {
-    try {
-        const orderDeleteCondition = { _id: req.params.id, userId: req.userId }
-        const deletedOrder = await Order.findOneAndDelete(orderDeleteCondition)
+// router.delete('/deleteOrdersByUserId/:id', verifyToken, async (req, res) => {
+//     try {
+//         const orderDeleteCondition = { _id: req.params.id, userId: req.userId }
+//         const deletedOrder = await Order.findOneAndDelete(orderDeleteCondition)
 
-        // User not authorised or post not found
-        if (!deletedOrder)
-            return res.status(401).json({
-                success: false,
-                message: 'Order not found or user not authorised'
-            })
+//         // User not authorised or post not found
+//         if (!deletedOrder)
+//             return res.status(401).json({
+//                 success: false,
+//                 message: 'Order not found or user not authorised'
+//             })
 
-        res.json({ success: true, favorites: deletedOrder })
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({ success: false, message: 'Internal server error' })
-    }
-})
+//         res.json({ success: true, favorites: deletedOrder })
+//     } catch (error) {
+//         console.log(error)
+//         res.status(500).json({ success: false, message: 'Internal server error' })
+//     }
+// })
 
 module.exports = router

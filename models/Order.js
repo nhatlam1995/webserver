@@ -7,6 +7,10 @@ const OrderSchema = new Schema({
         type: Number,
         required: true
     },
+    points: {
+        type: Number,
+        default: 0
+    },
     createdAt: {
 		type: Date,
 		default: Date.now

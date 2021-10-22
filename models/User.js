@@ -5,6 +5,11 @@ const Order = require('../models/Order').schema
 const Food = require('../models/Food').schema
 
 const UserSchema = new Schema({
+	role: {
+		type: String,
+		enum: ['Admin', 'User'],
+		required: true,
+	},
 	fullname: {
 		type: String,
 		required: true,
@@ -24,6 +29,10 @@ const UserSchema = new Schema({
 	createdAt: {
 		type: Date,
 		default: Date.now
+	},
+	memberPoints: {
+		type: Number,
+		default: 0
 	},
 	orderData: [
 		Order
