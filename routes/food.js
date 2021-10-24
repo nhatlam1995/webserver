@@ -103,6 +103,8 @@ router.delete('/deleteFoodFromFavorite/:id', verifyToken, async (req, res) => {
 
         console.log(favoriteCheck)
 
+        res.json({ success: true, message: 'Deleted successfully' })
+
     } catch (error) {
         console.log(error)
         res.status(500).json({ success: false, message: 'Favorite data hasnt created yet' })
