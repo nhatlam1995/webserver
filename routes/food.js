@@ -101,9 +101,10 @@ router.delete('/deleteFoodFromFavorite/:id', verifyToken, async (req, res) => {
         const userCheck = await User.findOne({ _id: decoded.userId })
         const favoriteCheck = await User.findOne({ _id: decoded.userId }).updateOne({}, { $pull: { favoritesData: { _id: req.params.id } } })
 
+        const data = userCheck.favoritesData
         console.log(favoriteCheck)
 
-        res.json({ success: true, message: 'Deleted successfully' })
+        res.json({ success: true, message: 'Deleted successfully', data })
 
     } catch (error) {
         console.log(error)
