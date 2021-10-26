@@ -90,11 +90,11 @@ GET http://localhost:8080/api/favorites/getFavorites
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTcyNzAxYjZjZTBiZDE5NzM2OWY5OWIiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYzNTA1NDk5MX0.Fx0sGoD-etRarYQufIpaSjaeH4Rl1v1qZ01pcTWCOWM
 
 ###
-POST http://localhost:8080/api/foods/addFoodIntoFavorite/6166617c6212f38ff7dcb421
+POST http://localhost:8080/api/foods/addFoodIntoFavorite/616661ab6212f38ff7dcb483
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTcyNzAxYjZjZTBiZDE5NzM2OWY5OWIiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYzNTA1NDk5MX0.Fx0sGoD-etRarYQufIpaSjaeH4Rl1v1qZ01pcTWCOWM
 
 ###
-DELETE http://localhost:8080/api/foods/deleteFoodFromFavorite/6166616d6212f38ff7dcb40e
+DELETE http://localhost:8080/api/foods/deleteFoodFromFavorite/616661ab6212f38ff7dcb483
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTcyNzAxYjZjZTBiZDE5NzM2OWY5OWIiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYzNDg4OTc1Nn0.m1y4hcFnp5Kc6tfzSW5r6fgujAEhmtR8imw6CFSjOWA
 
 #############################################################################################
