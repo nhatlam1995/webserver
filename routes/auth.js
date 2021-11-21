@@ -48,11 +48,6 @@ router.post('/register', async (req, res) => {
 			.status(400)
 			.json({ success: false, message: 'Missing password' })
 
-	else if (!role)
-		return res
-			.status(400)
-			.json({ success: false, message: 'Missing role' })
-
 	try {
 		// Check for existing user
 		const userMail = await User.findOne({ email })
