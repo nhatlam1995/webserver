@@ -24,15 +24,16 @@ Content-Type: application/json
 
 {
   "email": "nhatlam1695@gmail.com",
-  "password": "admin"
+  "password": "1"
 }
 
 ###
 //Forgot password
 POST http://localhost:8080/api/forgotPass/
+Content-Type: application/json
 
 {
-  "email": "hoanglong2012@gmail.com"
+  "email": "sept9th2015@gmail.com"
 }
 
 #############################################################################################

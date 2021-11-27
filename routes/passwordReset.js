@@ -8,8 +8,9 @@ const router = express.Router();
 router.post("/", async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
+        console.log(user);
         if (!user)
-            return res.status(400).send("user with given email doesn't exist");
+            return res.status(500).json({ success: false, message: "Email doesnt existed" });
 
         let token = await Token.findOne({ userId: user._id });
         if (!token) {
@@ -19,12 +20,12 @@ router.post("/", async (req, res) => {
             }).save();
         }
 
-        const link = `${process.env.BASE_URL}/password-reset/${user._id}/${token.token}`;
-        await sendEmail("nhatlam1695@gmail.com", "Password reset", link);
+        const link = `${process.env.BASE_URL}password-reset/${user._id}/${token.token}`;
+        await sendEmail(req.body.email, "Password reset", link);
 
-        res.send("password reset link sent to your email account");
+        res.status(200).json({ success: true, message: "Reset link sent to your email account" });
     } catch (error) {
-        res.send("An error occured");
+        res.status(500).json({ success: false, message: 'Internal server error' })
         console.log(error);
     }
 });
@@ -32,21 +33,21 @@ router.post("/", async (req, res) => {
 router.post("/:userId/:token", async (req, res) => {
     try {
         const user = await User.findById(req.params.userId);
-        if (!user) return res.status(400).send("invalid link or expired");
+        if (!user) return res.status(400).json({ success: false, message: "Invalid link or expired" });
 
         const token = await Token.findOne({
             userId: user._id,
             token: req.params.token,
         });
-        if (!token) return res.status(400).send("Invalid link or expired");
+        if (!token) return res.status(400).json({ success: false, message: "Invalid link or expired" });
 
         user.password = req.body.password;
         await user.save();
         await token.delete();
 
-        res.send("password reset sucessfully.");
+        res.status(200).json({ success: true, message: "Password reset sucessfully." });
     } catch (error) {
-        res.send("An error occured");
+        res.status(500).json({ success: false, message: 'Internal server error' })
         console.log(error);
     }
 });
