@@ -15,7 +15,7 @@ Content-Type: application/json
 ###
 //GET
 GET http://localhost:8080/api/auth/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTcyNzAxYjZjZTBiZDE5NzM2OWY5OWIiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTYzNDg4OTc1Nn0.m1y4hcFnp5Kc6tfzSW5r6fgujAEhmtR8imw6CFSjOWA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE1MTlmNjUxNDZiOWQ4NDI0ZTVlNDIiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjM4MjEwMTA1fQ.NijAyIWQT1rAsU6p7oUAC8wqNfE3bnKE9atvJejTsCg
 
 ###
 //Login account to get token
@@ -34,6 +34,17 @@ Content-Type: application/json
 
 {
   "email": "nhatlam1695@gmail.com"
+}
+
+###
+//Edit profile
+PUT http://localhost:8080/api/auth/edit/61a519f65146b9d8424e5e42
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE1MTlmNjUxNDZiOWQ4NDI0ZTVlNDIiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjM4MjEwMTA1fQ.NijAyIWQT1rAsU6p7oUAC8wqNfE3bnKE9atvJejTsCg
+
+{
+  "fullname": "Nguyễn Nhật Lam",
+  "phonenumber": "0123123123"
 }
 
 #############################################################################################

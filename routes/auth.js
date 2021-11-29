@@ -132,4 +132,25 @@ router.post('/login', async (req, res) => {
 	}
 })
 
+// @route POST api/auth/
+// @desc Edit
+// @access Public
+router.put('/edit/:id', verifyToken, async (req, res) => {
+	const { fullname, phonenumber } = req.body
+	try {
+		if (!fullname || !phonenumber) {
+			res.status(500).json({ success: false, message: "Please fill information" })
+		}
+
+		const user = await User.findByIdAndUpdate({ _id: req.params.id }, { fullname: fullname, phonenumber: phonenumber })
+
+		user.save();
+
+		res.status(200).json({ success: true, message: 'Edited successfully', data: user })
+	} catch (error) {
+		console.log(error)
+		res.status(500).json({ success: false, message: error })
+	}
+})
+
 module.exports = router
