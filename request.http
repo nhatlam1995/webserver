@@ -5,11 +5,11 @@ POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-  "fullname": "Nguyễn Đào Nhất",
-  "email":"daonhat27599@gmail.com",
-  "phonenumber":"034567891111",
+  "fullname": "Nguyen Nhat Lam",
+  "email":"nhatlam1695@gmail.com",
+  "phonenumber":"0123012301",
   "password": "admin",
-  "role": "Admin"
+  "role": "User"
 }
 
 ###
@@ -24,7 +24,7 @@ Content-Type: application/json
 
 {
   "email": "nhatlam1695@gmail.com",
-  "password": "1"
+  "password": "admin"
 }
 
 ###
@@ -38,12 +38,12 @@ Content-Type: application/json
 
 ###
 //Edit profile
-PUT http://localhost:8080/api/auth/edit/61a519f65146b9d8424e5e42
+PUT http://localhost:8080/api/auth/edit/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE1MTlmNjUxNDZiOWQ4NDI0ZTVlNDIiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjM4MjEwMTA1fQ.NijAyIWQT1rAsU6p7oUAC8wqNfE3bnKE9atvJejTsCg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE1NDAxODYzZTVmNzdkMzExYWEzM2MiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjM4MjE5ODA1fQ.UNfDlBhlAgvgetVcc4-tnhh-JsG5ojMbsY6T5s4UIIA
 
 {
-  "fullname": "Nguyễn Nhật Lam",
+  "fullname": "Nguyễn Nhật",
   "phonenumber": "0123123123"
 }
 
