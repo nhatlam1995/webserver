@@ -15,7 +15,7 @@ Content-Type: application/json
 ###
 //GET
 GET http://localhost:8080/api/auth/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE1MTlmNjUxNDZiOWQ4NDI0ZTVlNDIiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjM4MjEwMTA1fQ.NijAyIWQT1rAsU6p7oUAC8wqNfE3bnKE9atvJejTsCg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWE1NDAxODYzZTVmNzdkMzExYWEzM2MiLCJ1c2VybmFtZSI6Im5oYXRsYW0xNjk1QGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwiaWF0IjoxNjM4MjIzNzA2fQ.JROJym0UvdPwfLZw6qWkNag7aDbipphztypyOKMUNao
 
 ###
 //Login account to get token

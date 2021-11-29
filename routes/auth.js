@@ -149,7 +149,7 @@ router.put('/edit/', verifyToken, async (req, res) => {
 
 		user.save();
 
-		const newUser = await User.findById({ _id: decoded.userId })
+		const newUser = await User.findById({ _id: decoded.userId }).select('-password -role')
 
 		res.status(200).json({ success: true, message: 'Edited successfully', data: newUser })
 	} catch (error) {
