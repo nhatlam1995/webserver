@@ -46,7 +46,9 @@ router.post('/createOrders', verifyToken, async (req, res) => {
 
         await userCheck.save();
 
-        res.json({ success: true, message: 'Success', userCheck })
+        const newUserData = await User.findOne({ _id: decoded.userId }).select('-password -role')
+
+        res.json({ success: true, message: 'Success', newUserData })
 
     } catch (error) {
         console.log(error)
