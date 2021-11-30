@@ -12,7 +12,7 @@ const decodeToken = require('../services/service')
 // @access Public
 router.get('/', verifyToken, async (req, res) => {
 	try {
-		const user = await User.findById(req.userId).select('-password')
+		const user = await User.findById(req.userId).select('-password -role')
 		if (!user)
 			return res.status(400).json({ success: false, message: 'User not found' })
 		res.json({ success: true, user })
@@ -139,7 +139,7 @@ router.post('/login', async (req, res) => {
 router.put('/edit/', verifyToken, async (req, res) => {
 	const { fullname, phonenumber } = req.body
 	const decoded = decodeToken(req)
-	
+
 	try {
 		if (!fullname || !phonenumber) {
 			res.status(500).json({ success: false, message: "Please fill information" })
